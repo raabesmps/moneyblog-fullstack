@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "moneyblog-api-collection",
+		"name": "MoneyBlog API",
+		"description": "API RESTful do MoneyBlog - Aplicação de notícias do mercado financeiro.\n\nBackend desenvolvido em Laravel com dados mockados.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "List All Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categories",
+							"host": ["{{base_url}}"],
+							"path": ["categories"]
+						},
+						"description": "Retorna todas as categorias disponíveis no sistema."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category by Slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categories/mercado",
+							"host": ["{{base_url}}"],
+							"path": ["categories", "mercado"]
+						},
+						"description": "Retorna os detalhes de uma categoria específica.\n\nSlugs disponíveis:\n- all\n- mercado\n- cripto\n- economia\n- empresas"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints relacionados às categorias de notícias."
+		},
+		{
+			"name": "News",
+			"item": [
+				{
+					"name": "List All News",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/news",
+							"host": ["{{base_url}}"],
+							"path": ["news"]
+						},
+						"description": "Retorna todas as notícias com paginação padrão (12 por página)."
+					},
+					"response": []
+				},
+				{
+					"name": "List News with Pagination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/news?page=1&per_page=6",
+							"host": ["{{base_url}}"],
+							"path": ["news"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Número da página (default: 1)"
+								},
+								{
+									"key": "per_page",
+									"value": "6",
+									"description": "Itens por página (default: 12, max: 48)"
+								}
+							]
+						},
+						"description": "Retorna notícias com controle de paginação."
+					},
+					"response": []
+				},
+				{
+					"name": "List News by Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/news?category=cripto&page=1&per_page=12",
+							"host": ["{{base_url}}"],
+							"path": ["news"],
+							"query": [
+								{
+									"key": "category",
+									"value": "cripto",
+									"description": "Filtrar por categoria (mercado, cripto, economia, empresas)"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "12"
+								}
+							]
+						},
+						"description": "Retorna notícias filtradas por categoria.\n\nCategorias disponíveis:\n- mercado\n- cripto\n- economia\n- empresas"
+					},
+					"response": []
+				},
+				{
+					"name": "Search News",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/news/search?q=bitcoin&limit=10",
+							"host": ["{{base_url}}"],
+							"path": ["news", "search"],
+							"query": [
+								{
+									"key": "q",
+									"value": "bitcoin",
+									"description": "Termo de busca (busca em título, resumo e conteúdo)"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Limite de resultados (default: 20, max: 50)"
+								}
+							]
+						},
+						"description": "Busca notícias por termo.\n\nBusca em:\n- Título\n- Resumo\n- Conteúdo\n\nExemplos de termos:\n- bitcoin\n- S&P 500\n- Tesla\n- Fed\n- inflação"
+					},
+					"response": []
+				},
+				{
+					"name": "Get News by Slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/news/bitcoin-atinge-nova-maxima-historica-supera-100000",
+							"host": ["{{base_url}}"],
+							"path": ["news", "bitcoin-atinge-nova-maxima-historica-supera-100000"]
+						},
+						"description": "Retorna os detalhes completos de uma notícia específica pelo slug."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints relacionados às notícias do mercado financeiro."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [""]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [""]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000/api",
+			"type": "string"
+		}
+	]
+}
